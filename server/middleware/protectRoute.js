@@ -3,7 +3,8 @@ import User from '../Models/user.model.js';
 
 const protectRoute = async(req,res,next)=>{
     try {
-        const token  = req.cookie.jwt;
+        const token  = req.cookies.jwt;
+       
         if(!token){
             return res.status(401).json({error:"Unauthorized no token provided"})
         }
@@ -23,7 +24,8 @@ const protectRoute = async(req,res,next)=>{
         next();
 
     } catch (error) {
-        res.status(500).json({error:"Internal server error"})
+       console.log(error)
+        res.status(500).json({error:"Internal server in protect route error"})
     }
 }
 
